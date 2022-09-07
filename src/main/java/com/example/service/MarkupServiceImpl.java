@@ -16,7 +16,7 @@ public class MarkupServiceImpl implements MarkupService {
     public FxPrice addMarkup(FxPrice price) {
         return price.toBuilder()
                 .bid(calculateMarkup(price.getBid(), BID_MARKUP))
-                .ask(calculateMarkup(price.getBid(), ASK_MARKUP))
+                .ask(calculateMarkup(price.getAsk(), ASK_MARKUP))
                 .build();
     }
 

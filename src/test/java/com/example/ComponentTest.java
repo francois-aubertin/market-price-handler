@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.messaging.CsvMessageHandler;
+import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -38,9 +37,9 @@ class ComponentTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.currencyPair.base", equalTo("GBP")))
 				.andExpect(jsonPath("$.currencyPair.quote", equalTo("USD")))
-				.andExpect(jsonPath("$.bid", equalTo("TODO")))
-				.andExpect(jsonPath("$.ask", equalTo("TODO")))
-				.andExpect(jsonPath("$.timestamp", equalTo("2020-06-01T12:01:02:100")));
+				.andExpect(jsonPath("$.bid", closeTo(1.2487, 1e-4)))
+				.andExpect(jsonPath("$.ask", closeTo(1.2574, 1e-4)))
+				.andExpect(jsonPath("$.timestamp", equalTo("2020-06-01T12:01:02.1")));
 	}
 
 }
